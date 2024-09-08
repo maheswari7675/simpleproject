@@ -117,7 +117,7 @@
                 let bestScore = localStorage.getItem('bestScore') ? parseInt(localStorage.getItem('bestScore')) : 0
                 bestScoreDisplay.innerHTML = bestScore
 
-                //create the playing board
+                
                 function createBoard() {
                     for (let i=0; i < 16; i++) {
                         square = document.createElement('div')
@@ -130,27 +130,27 @@
                 }
                 createBoard()
 
-                //generate a new number
+                
                 function generate() {
-                    randomNumber = Math.floor(Math.random() * squares.length)  // A method that returns the largest integer less than or equal to a given number.Math.random(): A method that returns a random number between 0 and 1.squares.length: The length of the squares array.
-                    if (squares[randomNumber].innerHTML == 0) { //Checks if the inner HTML of the square element at the random index is 0.
-                        squares[randomNumber].innerHTML = 2  //Sets the inner HTML of the square element at the random index to 2.
+                    randomNumber = Math.floor(Math.random() * squares.length)  
+                    if (squares[randomNumber].innerHTML == 0) { 
+                        squares[randomNumber].innerHTML = 2 
                         checkForGameOver()
                     } else generate()
                 }
 
                 function moveRight() {
                     for (let i=0; i < 16; i++) {
-                    if (i % 4 === 0) {  //Checks if the current iteration is a multiple of 4.
-                        let totalOne = squares[i].innerHTML  //Gets the inner HTML of the square element at index i.
-                        let totalTwo = squares[i+1].innerHTML  //Gets the inner HTML of the square element at index i + 1.
-                        let totalThree = squares[i+2].innerHTML  //Gets the inner HTML of the square element at index i + 2.
-                        let totalFour = squares[i+3].innerHTML  //Gets the inner HTML of the square element at index i + 3.
-                        let row = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]  // Creates an array of integers from the inner HTML values.
+                    if (i % 4 === 0) {  
+                        let totalOne = squares[i].innerHTML  
+                        let totalTwo = squares[i+1].innerHTML  
+                        let totalThree = squares[i+2].innerHTML  
+                        let totalFour = squares[i+3].innerHTML  
+                        let row = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]  
 
-                        let filteredRow = row.filter(num => num)  //Filters out any falsy values (e.g. 0) from the row array.filter: A method that creates a new array with all elements that pass the test implemented by the provided function.num => num: A callback function that returns the value of each element, effectively filtering out falsy values.filteredRow: The filtered array.
-                        let missing = 4 - filteredRow.length  //Calculates the number of missing elements in the filteredRow array.
-                        let zeros = Array(missing).fill(0)  //Creates an array of zeros
+                        let filteredRow = row.filter(num => num)  
+                        let missing = 4 - filteredRow.length  
+                        let zeros = Array(missing).fill(0)  
                         let newRow = zeros.concat(filteredRow)
 
                         squares[i].innerHTML = newRow[0]
@@ -250,7 +250,7 @@
                     checkForWin()
                 }
 
-            //assign functions to keyCodes
+           
             function control(e) {
                 if(e.keyCode === 37) {
                 keyLeft()
@@ -292,7 +292,7 @@
                 generate()
             }
 
-            //check for the number 2048 in the squares to win
+            
             function checkForWin() {
                 for (let i=0; i < squares.length; i++) {
                 if (squares[i].innerHTML == 2048) {
@@ -303,7 +303,7 @@
                 }
             }
 
-            //check if there are no zeros on the board to lose
+            
             function checkForGameOver() {
                 let zeros = 0
                 for (let i=0; i < squares.length; i++) {
@@ -318,13 +318,13 @@
                 }
             }
 
-            //clear timer
+            
             function clear() {
                 clearInterval(myTimer)
             }
 
 
-            //add colours
+            
             function addColours() {
                 for (let i=0; i < squares.length; i++) {
                 if (squares[i].innerHTML == 0) squares[i].style.backgroundColor = '#afa192'
